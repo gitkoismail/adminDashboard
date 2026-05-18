@@ -17,6 +17,7 @@ const useCrudPage = ({
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
 
+  // 🔥 FETCH + FALLBACK
   useEffect(() => {
     let isFetching = false;
 
@@ -28,10 +29,8 @@ const useCrudPage = ({
         const response = await api.get(endpoint);
         setItems(response.data);
       } catch (err) {
-        console.log(err.message);
-
-        // FALLBACK 
-        if (fallbackData && items.length === 0) {
+        console.log("API failed → fallback used");
+        if (fallbackData) {
           setItems(fallbackData);
         }
       } finally {
@@ -42,10 +41,10 @@ const useCrudPage = ({
     fetchItems();
 
     const interval = setInterval(fetchItems, 5000);
-
     return () => clearInterval(interval);
-  }, [endpoint, fallbackData]); // dependency 
+  }, [endpoint, fallbackData]);
 
+  // 🔍 FILTER + SEARCH
   const filteredItems = useMemo(() => {
     let result = items;
 
@@ -68,6 +67,7 @@ const useCrudPage = ({
     return result;
   }, [items, filter, search, filters, filterField, searchFields]);
 
+  // 📊 STATS
   const stats = useMemo(() => {
     const result = { all: items.length };
 
@@ -80,6 +80,7 @@ const useCrudPage = ({
     return result;
   }, [items, filters, filterField]);
 
+  // ✏️ CHANGE
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -94,6 +95,7 @@ const useCrudPage = ({
     setOriginalItem(null);
   };
 
+  // 🔥 CREATE + UPDATE (FALLBACK DESTEKLİ)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -105,15 +107,39 @@ const useCrudPage = ({
       if (!preparedData) return;
 
       if (editingId !== null) {
-        const updatedItem = { ...preparedData, id: editingId };
-        const response = await api.put(`${endpoint}/${editingId}`, updatedItem);
+        let updatedItem;
+
+        try {
+          const response = await api.put(
+            `${endpoint}/${editingId}`,
+            preparedData
+          );
+          updatedItem = response.data;
+        } catch {
+          // 🔥 fallback update
+          updatedItem = { ...preparedData, id: editingId };
+        }
 
         setItems((prev) =>
-          prev.map((item) => (item.id === editingId ? response.data : item))
+          prev.map((item) =>
+            item.id === editingId ? updatedItem : item
+          )
         );
       } else {
-        const response = await api.post(endpoint, preparedData);
-        setItems((prev) => [...prev, response.data]);
+        let newItem;
+
+        try {
+          const response = await api.post(endpoint, preparedData);
+          newItem = response.data;
+        } catch {
+          // 🔥 fallback create
+          newItem = {
+            ...preparedData,
+            id: Date.now().toString(),
+          };
+        }
+
+        setItems((prev) => [...prev, newItem]);
       }
 
       resetForm();
@@ -122,15 +148,18 @@ const useCrudPage = ({
     }
   };
 
+  // 🔥 DELETE (FALLBACK DESTEKLİ)
   const handleDelete = async (id) => {
     try {
       await api.delete(`${endpoint}/${id}`);
-      setItems((prev) => prev.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
+    } catch {
+      // 🔥 fallback delete (sessiz geç)
     }
+
+    setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  // ✏️ EDIT START
   const handleEditStart = (id) => {
     const selected = items.find((item) => item.id === id);
     if (!selected) return;

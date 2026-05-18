@@ -1,100 +1,117 @@
 import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
-import { FiUsers, FiAlertOctagon, FiLock } from "react-icons/fi";
+import { FiUsers, FiLock } from "react-icons/fi";
 
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [loginData, setLoginData] = useState({
-        email: "",
-        password: "",
-    });
-    
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const findUser = async (e) => {
-        e.preventDefault();
+  const findUser = async (e) => {
+    e.preventDefault();
 
-        try {
-            const response = await api.get(`/staff`);
+    try {
+      const response = await api.get(`/staff`);
 
-            const user = response.data.find(
-            (u) =>
-                u.email.toLowerCase() === loginData.email.toLowerCase()
-            );
+      const user = response.data.find(
+        (u) =>
+          u.email.toLowerCase() === loginData.email.toLowerCase()
+      );
 
-            if (!user || user.password !== loginData.password) {
-            alert("Email or password is wrong");
-            return;
-            }
+      if (!user || user.password !== loginData.password) {
+        throw new Error("Fallback");
+      }
 
-            await api.patch(`/staff/${user.id}`, {
-            status: "Online",
-            });
+      await api.patch(`/staff/${user.id}`, {
+        status: "Online",
+      });
 
-            const updatedUser = { ...user, status: "Online" };
+      const updatedUser = { ...user, status: "Online" };
 
-            localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+      localStorage.setItem("currentUser", JSON.stringify(updatedUser));
 
-            navigate("/dashboard");
-        } catch (err) {
-            console.log(err.message);
-        }
-    };
-    
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+      navigate("/dashboard");
 
-        setLoginData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+    } catch (err) {
+      // 🔥 FALLBACK LOGIN (Netlify için)
+      const dummyUser = {
+        id: "1",
+        email: "admin@mail.com",
+        password: "1234",
+        name: "Admin",
+        status: "Online",
+      };
 
-    
+      if (
+        loginData.email !== dummyUser.email ||
+        loginData.password !== dummyUser.password
+      ) {
+        alert("Email or password is wrong");
+        return;
+      }
+
+      localStorage.setItem("currentUser", JSON.stringify(dummyUser));
+      navigate("/dashboard");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setLoginData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <main className="login-page">
-        <section className="login-card">
-            <h2 className="login-title">Login</h2>
-            <form className="userAddForm" onSubmit={findUser}>
-                <div className="login-border">
-                    <label htmlFor="email">Email</label>
-                    <div className="input-group">
-                        <FiUsers className="input-icon" strokeWidth={1}/>
-                        <input 
-                            type="text"
-                            id='email'
-                            name='email'
-                            required
-                            placeholder='HaldirArcher@gmail.com'
-                            value={loginData.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <p className="helper-text">Someone@...</p>
-                </div>
-                <div className="login-border">
-                    <label htmlFor="password">Password</label>
-                    <div className="input-group">
-                        <FiLock className="input-icon" strokeWidth={1}/>
-                        <input 
-                            type="password"
-                            id='password'
-                            name='password'
-                            required
-                            placeholder= '. . . . . . .'
-                            value={loginData.password}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <p className="helper-text">Sz27e@...</p>
-                </div>
-                <button type="submit">Sign In</button>  
-            </form>
-        </section>
-    </main>
-  )
-}
+      <section className="login-card">
+        <h2 className="login-title">Login</h2>
+        <form className="userAddForm" onSubmit={findUser}>
+          <div className="login-border">
+            <label htmlFor="email">Email</label>
+            <div className="input-group">
+              <FiUsers className="input-icon" strokeWidth={1} />
+              <input
+                type="text"
+                id="email"
+                name="email"
+                required
+                placeholder="admin@mail.com"
+                value={loginData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="helper-text">admin@mail.com</p>
+          </div>
 
-export default Login
+          <div className="login-border">
+            <label htmlFor="password">Password</label>
+            <div className="input-group">
+              <FiLock className="input-icon" strokeWidth={1} />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                placeholder="1234"
+                value={loginData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="helper-text">1234</p>
+          </div>
+
+          <button type="submit">Sign In</button>
+        </form>
+      </section>
+    </main>
+  );
+};
+
+export default Login;

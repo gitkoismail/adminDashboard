@@ -145,6 +145,15 @@
       "city": "Adana",
       "status": "Inactive",
       "id": "pVHcpAOd3b4"
+    },
+    {
+      "fullName": "Aydın Kurtuluş",
+      "email": "aydınkurtulus.cıo@gmail.com",
+      "phone": "+90 555 555 55 55",
+      "company": "Kurtuluş Holding",
+      "city": "Aydın",
+      "status": "VIP",
+      "id": "ozcS5yvt3wU"
     }
   ],
   "products": [

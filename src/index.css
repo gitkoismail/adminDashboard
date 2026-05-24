@@ -18,17 +18,22 @@
 /* || GENERAL STYLE */
 
 html {
+  width: 100%;
+  min-height: 100vh;
   font-size: 16px;
 }
 
 #root {
+  width: 100%;
+  min-height: 100vh;
   flex-grow: 1;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
 }
 
 body {
+  width: 100%;
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,12 +53,18 @@ body {
 
 .sidebar {
   position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 220px;
   height: 100vh;
   padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #ffffff;
   color: #0f172a;
   border-right: 1px solid #e2e8f0;
@@ -157,25 +168,35 @@ body {
 /* || MAIN */
 
 .Header {
+  width: 100%;
+  max-width: 100%;
   color: #0f172a;
   font-size: 2rem;
   font-weight: 700;
   margin-inline: auto;
   padding: 12px;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .Main {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 100%;
+  width: calc(100% - 220px);
+  min-width: 0;
+  min-height: 100vh;
   height: auto;
+  margin-left: 220px;
 }
 
 .pages {
   flex: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: 24px;
-  margin-left: 220px;
+  margin-left: 0;
 }
 
 .pages h2,
@@ -187,10 +208,21 @@ body {
 
 /* || DASHBOARD */
 
+.dashboard-page {
+  min-width: 0;
+}
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard-grid > * {
+  min-width: 0;
 }
 
 .col-4 {
@@ -280,12 +312,19 @@ body {
   flex-direction: row;
   align-items: center;
   background: #ffffff;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .card-icon {
   font-size: 4rem;
   color: #0f172a;
   padding-right: 32px;
+}
+
+.card-info {
+  min-width: 0;
 }
 
 .card-info h3 {
@@ -310,6 +349,8 @@ tr {
 }
 
 .section-userTable {
+  width: 100%;
+  max-width: 100%;
   padding: 0;
   margin-top: 12px;
   overflow-x: auto;
@@ -951,8 +992,13 @@ tr {
     padding: 3px 8px;
   }
 
-  .pages {
+  .Main {
+    width: calc(100% - 130px);
     margin-left: 130px;
+  }
+
+  .pages {
+    margin-left: 0;
     padding: 20px 14px;
   }
 
@@ -991,7 +1037,11 @@ tr {
     padding-right: 16px;
   }
 
-  .card-info h3 {
+  .card-info {
+  min-width: 0;
+}
+
+.card-info h3 {
     font-size: 0.95rem;
   }
 
@@ -1233,14 +1283,21 @@ tr {
     line-height: 1;
   }
 
-  .pages {
+  .Main {
+    width: calc(100% - 58px);
     margin-left: 58px;
+  }
+
+  .pages {
+    margin-left: 0;
     padding: 16px 10px;
   }
 
   .Header {
-    font-size: 1.25rem;
-    padding: 8px;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    padding: 12px 8px;
+    white-space: normal;
   }
 
   .pages h2,
@@ -1258,7 +1315,9 @@ tr {
   .col-6,
   .col-8,
   .col-12 {
-    grid-column: span 1;
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
   }
 
   .card {
@@ -1270,7 +1329,11 @@ tr {
     padding-right: 12px;
   }
 
-  .card-info h3 {
+  .card-info {
+  min-width: 0;
+}
+
+.card-info h3 {
     font-size: 0.9rem;
   }
 
@@ -1333,6 +1396,12 @@ tr {
     width: max-content;
     min-width: 910px;
     grid-template-columns: repeat(7, 130px);
+  }
+
+  .dashboard-page .section-userTable {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .dashboard-page .section-recentTable__container {

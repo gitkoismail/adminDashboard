@@ -107,19 +107,20 @@ const Dashboard = () => {
   const orderStatusData = [
     {
       name: "Pending",
-      value: orders.filter((o) => o.orderStatus === "Pending").length,
+      value: orders.filter((order) => order.orderStatus === "Pending").length,
     },
     {
       name: "Processing",
-      value: orders.filter((o) => o.orderStatus === "Processing").length,
+      value: orders.filter((order) => order.orderStatus === "Processing")
+        .length,
     },
     {
       name: "Delivered",
-      value: orders.filter((o) => o.orderStatus === "Delivered").length,
+      value: orders.filter((order) => order.orderStatus === "Delivered").length,
     },
     {
       name: "Cancelled",
-      value: orders.filter((o) => o.orderStatus === "Cancelled").length,
+      value: orders.filter((order) => order.orderStatus === "Cancelled").length,
     },
   ];
 
@@ -190,7 +191,7 @@ const Dashboard = () => {
                 <BarChart data={ordersByTime}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
-                  <YAxis />
+                  <YAxis allowDecimals={false} />
                   <Tooltip />
                   <Bar dataKey="orders" fill="#3b82f6" />
                 </BarChart>
@@ -214,7 +215,7 @@ const Dashboard = () => {
                     dataKey="value"
                     cx="50%"
                     cy="50%"
-                    outerRadius={100}
+                    outerRadius={90}
                     labelLine={false}
                     label={({ name, value }) => {
                       if (value === 0) return "";

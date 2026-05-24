@@ -8,7 +8,7 @@ Bu proje kullanıcı, müşteri, ürün ve sipariş yönetimi yapabilen bir yön
 
 ## Live Demo
 
-Live: Yakında eklenecek  
+Live: https://admin-dashboard-supabase.netlify.app/
 Repository: https://github.com/gitkoismail/adminDashboard
 
 ---

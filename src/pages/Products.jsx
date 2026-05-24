@@ -3,8 +3,8 @@ import AddProducts from "../components/AddProducts.jsx";
 import useCrudPage from "../hooks/useCrudPage.js";
 import useFetch from "../hooks/useFetch.js";
 import useOrderActions from "../hooks/useOrderActions.js";
-import api from "../services/api.js";
 import dummyProducts from "../data/dummyProducts";
+import { deleteItem, getItems } from "../services/supabaseCrud.js";
 
 const productConfig = {
   endpoint: "/products",
@@ -46,11 +46,11 @@ const Products = ( ) => {
     } = useCrudPage(productConfig);
 
     const { data: orders } = useFetch("/orders");
-  const { handleDeleteWithStock } = useOrderActions(
+    const { handleDeleteWithStock } = useOrderActions(
     orders,
     products,
     async (id) => {
-      await api.delete(`/orders/${id}`); 
+      await deleteItem("/orders", id);
     }
   );
 
@@ -62,8 +62,7 @@ const Products = ( ) => {
     if (!confirmDelete) return;
 
     try {
-      const res = await api.get("/orders");
-      const allOrders = res.data;
+      const allOrders = orders.length ? orders : await getItems("/orders");
 
       const relatedOrders = allOrders.filter(
         (order) => String(order.productId) === String(productId)

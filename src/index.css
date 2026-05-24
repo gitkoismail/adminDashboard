@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 /* || RESET */
 
 * {
@@ -10,8 +11,8 @@
 /* || UTILITY STYLE */
 
 .offscreen {
-    position: absolute;
-    left: -10000px;
+  position: absolute;
+  left: -10000px;
 }
 
 /* || GENERAL STYLE */
@@ -29,7 +30,7 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f8fafc;
@@ -82,7 +83,6 @@ body {
   font-weight: 400;
   transition: all 0.2s ease;
 }
-
 
 .sidebar span {
   padding-right: 8px;
@@ -193,10 +193,21 @@ body {
   gap: 24px;
 }
 
-.col-4 { grid-column: span 4; }
-.col-6 { grid-column: span 6; }
-.col-8 { grid-column: span 8; }
-.col-12 { grid-column: span 12; }
+.col-4 {
+  grid-column: span 4;
+}
+
+.col-6 {
+  grid-column: span 6;
+}
+
+.col-8 {
+  grid-column: span 8;
+}
+
+.col-12 {
+  grid-column: span 12;
+}
 
 .chart-box {
   background: #ffffff;
@@ -209,17 +220,13 @@ body {
   margin-top: 16px;
   margin-right: 16px;
   padding: 0;
-
   border: none;
   border-radius: 0;
-
   background-color: transparent;
   color: #1d4ed8;
-
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-
   cursor: pointer;
 }
 
@@ -250,7 +257,6 @@ body {
 
 .low-stock ul {
   list-style-type: none;
-
 }
 
 .low-stock li {
@@ -269,7 +275,7 @@ body {
   border: 1px solid #e5e7eb;
   padding: 16px;
   border-radius: 10px;
-  box-shadow: none; /* kaldırdık */
+  box-shadow: none;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -285,7 +291,6 @@ body {
 .card-info h3 {
   font-size: 1.25rem;
   color: #0f172a;
-  
 }
 
 .card-info p {
@@ -339,20 +344,17 @@ tr {
   background-color: #ffffff;
 }
 
-/* DASHBOARD RECENT ORDERS */
+/* Dashboard Recent Orders */
 
 .dashboard-page .section-recentTable__container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-
   width: 100%;
   margin: 0;
-
   border: 1px solid #cbd5e1;
   border-radius: 5px;
   overflow: hidden;
-
   background-color: #ffffff;
 }
 
@@ -370,15 +372,12 @@ tr {
 .dashboard-page .section-recentTable__container .section-userTable__header {
   min-height: 54px;
   padding: 12px 10px;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   border: none;
   background-color: #ffffff;
   color: #0f172a;
-
   font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.2;
@@ -387,15 +386,12 @@ tr {
 .dashboard-page .section-recentTable__container .section-userTable__item {
   min-height: 54px;
   padding: 12px 10px;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   border: none;
   background-color: #ffffff;
   color: #0f172a;
-
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.25;
@@ -406,7 +402,8 @@ tr {
   color: #0f172a;
 }
 
-/* STAFF - 6 kolon */
+/* Staff - 6 kolon */
+
 .staff-page .section-userTable__container {
   grid-template-columns:
     minmax(130px, 0.9fr)
@@ -417,7 +414,8 @@ tr {
     minmax(210px, 1.2fr);
 }
 
-/* CUSTOMERS - 7 kolon */
+/* Customers - 7 kolon */
+
 .customers-page .section-customerTable__container {
   grid-template-columns:
     minmax(150px, 1fr)
@@ -429,7 +427,8 @@ tr {
     minmax(210px, 1.2fr);
 }
 
-/* PRODUCTS - 7 kolon */
+/* Products - 7 kolon */
+
 .products-page .section-customerTable__container {
   grid-template-columns:
     minmax(190px, 1.3fr)
@@ -441,7 +440,8 @@ tr {
     minmax(210px, 1.2fr);
 }
 
-/* ORDERS - 7 kolon */
+/* Orders - 7 kolon */
+
 .orders-page .section-customerTable__container {
   grid-template-columns:
     minmax(170px, 1.1fr)
@@ -478,15 +478,12 @@ tr {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   width: 100%;
   min-height: 54px;
   padding: 12px 10px;
-
   border: none;
   background-color: #ffffff;
   color: #0f172a;
-
   font-family: "Open Sans", sans-serif;
   line-height: 1.25;
 }
@@ -509,6 +506,7 @@ tr {
 }
 
 /* Action buttons */
+
 .section-userTable__item:last-child {
   gap: 12px;
 }
@@ -517,24 +515,23 @@ tr {
   min-width: 76px;
   height: 36px;
   padding: 0 14px;
-
   border: none;
   border-radius: 5px;
-
   font-family: "Open Sans", sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-
   cursor: pointer;
 }
 
 /* Delete */
+
 .section-userTable__item button:first-child {
   background-color: #f8fafc;
   color: #1d4ed8;
 }
 
 /* Edit */
+
 .section-userTable__item button:last-child {
   background-color: #f59e0b;
   color: #ffffff;
@@ -548,7 +545,6 @@ tr {
   background-color: #d97706;
 }
 
-/* Status yazıları tablo içinde badge gibi değil, düz görünsün */
 .section-userTable__item[class*="status-"] {
   background-color: #ffffff;
   color: #0f172a;
@@ -573,14 +569,11 @@ tr {
   width: 100%;
   min-height: 42px;
   padding: 0 12px;
-
   border: 1px solid #e2e8f0;
   border-radius: 5px;
   outline: none;
-
   background-color: #ffffff;
   color: #0f172a;
-
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
 }
@@ -611,18 +604,14 @@ tr {
 
 .pagesUsers__section-button button {
   padding: 0;
-
   border: none;
   border-radius: 0;
-
   background-color: transparent;
   color: #1d4ed8;
-
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
-
   cursor: pointer;
 }
 
@@ -637,11 +626,9 @@ tr {
   display: grid;
   align-items: center;
   gap: 12px;
-
   margin-left: 308px;
   margin-bottom: 32px;
   padding: 0;
-
   color: #64748b;
 }
 
@@ -695,6 +682,7 @@ tr {
   display: flex;
   flex-direction: column;
 }
+
 .login-border {
   display: flex;
   flex-direction: column;
@@ -703,6 +691,7 @@ tr {
   border: 1px solid #cbd5e1;
   border-radius: 5px;
 }
+
 .userAddForm input {
   width: 100%;
   padding: 16px 12px;
@@ -734,7 +723,7 @@ tr {
   top: 50%;
   transform: translateY(-50%);
   font-size: 1rem;
-  pointer-events: none; /* önemli */
+  pointer-events: none;
   color: #64748b;
 }
 
@@ -772,11 +761,9 @@ tr {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr)) 90px;
   gap: 14px;
-
   width: 100%;
   margin-top: 28px;
   padding: 0;
-
   background-color: transparent;
 }
 
@@ -789,14 +776,11 @@ tr {
   width: 100%;
   min-height: 46px;
   padding: 0 12px;
-
   border: 1px solid #e2e8f0;
   border-radius: 5px;
   outline: none;
-
   background-color: #ffffff;
   color: #0f172a;
-
   font-family: "Open Sans", sans-serif;
   font-size: 0.9rem;
 }
@@ -817,17 +801,13 @@ tr {
   min-height: 46px;
   margin-top: 0;
   padding: 0 12px;
-
   border: none;
   border-radius: 5px;
-
   background-color: #1d4ed8;
   color: #ffffff;
-
   font-family: "Open Sans", sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-
   cursor: pointer;
 }
 
@@ -835,18 +815,15 @@ tr {
   background-color: #1e40af;
 }
 
-/* Staff form 4 input + button */
 .staff-page .userAddForm {
   grid-template-columns: repeat(4, minmax(0, 1fr)) 110px;
 }
 
-/* Customer/Product form 6 alan + button */
 .customers-page .userAddForm,
 .products-page .userAddForm {
   grid-template-columns: repeat(6, minmax(0, 1fr)) 80px;
 }
 
-/* Order form 5 alan + button */
 .orders-page .userAddForm {
   grid-template-columns: repeat(5, minmax(0, 1fr)) 100px;
 }
@@ -861,9 +838,7 @@ tr {
 
 .profile-page h2 {
   margin-bottom: 56px;
-
   color: #0f172a;
-
   font-size: 2.25rem;
   line-height: 1.2;
   font-weight: 700;
@@ -875,17 +850,14 @@ tr {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
 }
 
 .profile-avatar {
   width: 280px;
   height: 280px;
-
   border-radius: 50%;
   object-fit: cover;
-
   margin-bottom: 56px;
 }
 
@@ -895,9 +867,7 @@ tr {
 
 .profile-info h3 {
   margin-bottom: 52px;
-
   color: #0f172a;
-
   font-size: 1.75rem;
   line-height: 1.2;
   font-weight: 700;
@@ -907,11 +877,8 @@ tr {
   display: flex;
   align-items: center;
   gap: 12px;
-
   margin-bottom: 44px;
-
   color: #0f172a;
-
   font-size: 1.25rem;
   line-height: 1.2;
   font-weight: 400;
@@ -929,20 +896,218 @@ tr {
 
 .profile-helper {
   justify-content: center;
-
   margin-top: 12px;
   margin-bottom: 0;
-
   color: #64748b !important;
-
   font-size: 1.125rem !important;
   font-weight: 400 !important;
   letter-spacing: 0.02em;
 }
 
-/* PROFILE RESPONSIVE */
+/* || RESPONSIVE - TABLET AND MOBILE */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    width: 130px;
+    padding: 16px 10px;
+  }
+
+  .sidebar h3 {
+    font-size: 1rem;
+    padding: 8px 6px;
+    margin-bottom: 14px;
+  }
+
+  .sidebar a {
+    font-size: 0.85rem;
+    padding: 8px 6px;
+  }
+
+  .sidebar span {
+    padding-right: 4px;
+  }
+
+  .sideSvg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .navbar-user {
+    padding-top: 14px;
+  }
+
+  .navbar-user button {
+    font-size: 0.8rem;
+    padding: 7px 8px;
+  }
+
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .pages {
+    margin-left: 130px;
+    padding: 20px 14px;
+  }
+
+  .Header {
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  .pages h2,
+  .staff-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  .col-4 {
+    grid-column: span 3;
+  }
+
+  .col-6,
+  .col-8,
+  .col-12 {
+    grid-column: span 6;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    padding-right: 16px;
+  }
+
+  .card-info h3 {
+    font-size: 0.95rem;
+  }
+
+  .card-info p {
+    font-size: 0.85rem;
+  }
+
+  .chart-box,
+  .chart-pie,
+  .low-stock {
+    padding: 12px;
+  }
+
+  .pagesUsers__nav {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .pagesUsers__form input[type="text"] {
+    min-height: 38px;
+    font-size: 0.9rem;
+  }
+
+  .pagesUsers__section-button {
+    gap: 8px;
+  }
+
+  .staff-page .pagesUsers__section-button,
+  .customers-page .pagesUsers__section-button {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-page .pagesUsers__section-button {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .orders-page .pagesUsers__section-button {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pagesUsers__section-button button {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .pagesUsers__section-p {
+    margin-left: 0;
+    margin-bottom: 22px;
+    gap: 8px;
+  }
+
+  .staff-page .pagesUsers__section-p,
+  .customers-page .pagesUsers__section-p {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-page .pagesUsers__section-p {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .orders-page .pagesUsers__section-p {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pagesUsers__section-p p {
+    font-size: 0.72rem;
+  }
+
+  .section-userTable {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .staff-page .section-userTable__container {
+    width: max-content;
+    min-width: 900px;
+    grid-template-columns: repeat(6, 150px);
+  }
+
+  .customers-page .section-customerTable__container,
+  .products-page .section-customerTable__container,
+  .orders-page .section-customerTable__container {
+    width: max-content;
+    min-width: 1050px;
+    grid-template-columns: repeat(7, 150px);
+  }
+
+  .section-userTable__header {
+    font-size: 1rem;
+  }
+
+  .section-userTable__item {
+    font-size: 0.82rem;
+  }
+
+  .section-userTable__item button {
+    min-width: 64px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .pages .userAddForm,
+  .staff-page .userAddForm,
+  .customers-page .userAddForm,
+  .products-page .userAddForm,
+  .orders-page .userAddForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pages .userAddForm button {
+    grid-column: span 2;
+  }
+
   .profile-page h2 {
     font-size: 1.85rem;
     margin-bottom: 40px;
@@ -967,5 +1132,293 @@ tr {
   .profile-info p {
     font-size: 1.05rem;
     margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 58px;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 12px 6px;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .sidebar h3 {
+    font-size: 0;
+    padding: 0;
+    margin-bottom: 18px;
+  }
+
+  .sidebar h3::first-letter {
+    font-size: 0;
+  }
+
+  .sidebar ul {
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sidebar a {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    border-radius: 8px;
+  }
+
+  .sidebar a span {
+    display: none;
+  }
+
+  .sideSvg {
+    position: static;
+    width: 20px;
+    height: 20px;
+  }
+
+  .navbar-user {
+    width: 100%;
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .status-badge {
+    display: none;
+  }
+
+  .navbar-user button {
+    width: 42px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+    color: #1d4ed8;
+  }
+
+  .navbar-user button span {
+    display: none;
+  }
+
+  .navbar-user button svg {
+    display: block !important;
+    width: 18px;
+    height: 18px;
+    color: #1d4ed8;
+    stroke: #1d4ed8;
+  }
+
+  .navbar-user button span:first-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d4ed8;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .pages {
+    margin-left: 58px;
+    padding: 16px 10px;
+  }
+
+  .Header {
+    font-size: 1.25rem;
+    padding: 8px;
+  }
+
+  .pages h2,
+  .staff-title {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-12 {
+    grid-column: span 1;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    padding-right: 12px;
+  }
+
+  .card-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .card-info p {
+    font-size: 0.8rem;
+  }
+
+  .chart-box,
+  .chart-pie,
+  .low-stock {
+    padding: 10px;
+  }
+
+  .pagesUsers__nav {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .pagesUsers__form input[type="text"] {
+    min-height: 36px;
+    font-size: 0.82rem;
+  }
+
+  .staff-page .pagesUsers__section-button,
+  .customers-page .pagesUsers__section-button,
+  .products-page .pagesUsers__section-button,
+  .orders-page .pagesUsers__section-button {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pagesUsers__section-button button {
+    font-size: 0.72rem;
+  }
+
+  .staff-page .pagesUsers__section-p,
+  .customers-page .pagesUsers__section-p,
+  .products-page .pagesUsers__section-p,
+  .orders-page .pagesUsers__section-p {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pagesUsers__section-p {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .pagesUsers__section-p p {
+    font-size: 0.68rem;
+  }
+
+  .staff-page .section-userTable__container {
+    width: max-content;
+    min-width: 780px;
+    grid-template-columns: repeat(6, 130px);
+  }
+
+  .customers-page .section-customerTable__container,
+  .products-page .section-customerTable__container,
+  .orders-page .section-customerTable__container {
+    width: max-content;
+    min-width: 910px;
+    grid-template-columns: repeat(7, 130px);
+  }
+
+  .dashboard-page .section-recentTable__container {
+    width: max-content;
+    min-width: 390px;
+    grid-template-columns: repeat(3, 130px);
+  }
+
+  .section-userTable__header {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 0.82rem;
+  }
+
+  .section-userTable__item {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 0.72rem;
+  }
+
+  .section-userTable__item:last-child {
+    gap: 6px;
+  }
+
+  .section-userTable__item button {
+    min-width: 52px;
+    height: 28px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+  }
+
+  .pages .userAddForm,
+  .staff-page .userAddForm,
+  .customers-page .userAddForm,
+  .products-page .userAddForm,
+  .orders-page .userAddForm {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pages .userAddForm button {
+    grid-column: span 1;
+  }
+
+  .pages .userAddForm input,
+  .pages .userAddForm select,
+  .pages .userAddForm button {
+    min-height: 40px;
+    font-size: 0.8rem;
+  }
+
+  .profile-page {
+    padding-top: 18px;
+  }
+
+  .profile-page h2 {
+    font-size: 1.35rem;
+    margin-bottom: 28px;
+  }
+
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 28px;
+  }
+
+  .profile-info {
+    width: 100%;
+  }
+
+  .profile-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+
+  .profile-info p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 22px;
+  }
+
+  .profile-helper {
+    text-align: center;
+    align-items: center;
+    font-size: 0.85rem !important;
   }
 }

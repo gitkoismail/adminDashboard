@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import api from "../services/api";
+import { supabase } from "../services/supabaseClient";
 
-const ACTIVE_TIMEOUT = 10000;   // 5 dk 5 * 60 * 1000
-const INACTIVE_TIMEOUT = 20000; // 15 dk 15 * 60 * 1000
+const ACTIVE_TIMEOUT = 10000;
+const INACTIVE_TIMEOUT = 20000;
 
 const useUserPresence = () => {
   const [status, setStatus] = useState("Online");
   const lastActivityRef = useRef(Date.now());
-  const lastSentStatusRef = useRef(null); // aynı statusu tekrar göndermemek için
+  const lastSentStatusRef = useRef(null);
 
   const getUser = () => {
     try {
@@ -24,7 +24,15 @@ const useUserPresence = () => {
     if (lastSentStatusRef.current === newStatus) return;
 
     try {
-      await api.patch(`/staff/${user.id}`, { status: newStatus });
+      const { error } = await supabase
+        .from("staff")
+        .update({ status: newStatus })
+        .eq("id", user.id);
+
+      if (error) {
+        throw error;
+      }
+
       lastSentStatusRef.current = newStatus;
     } catch (err) {
       console.error("Status update failed:", err.message);
@@ -65,6 +73,7 @@ const useUserPresence = () => {
             updateStatus("Inactive");
             return "Inactive";
           }
+
           return prev;
         });
       } else if (diff > ACTIVE_TIMEOUT) {
@@ -73,6 +82,7 @@ const useUserPresence = () => {
             updateStatus("Pending");
             return "Pending";
           }
+
           return prev;
         });
       }
@@ -85,7 +95,7 @@ const useUserPresence = () => {
     updateStatus("Online");
   }, []);
 
-  return status; 
+  return status;
 };
 
 export default useUserPresence;

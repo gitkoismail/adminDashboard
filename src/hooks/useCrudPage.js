@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import api from "../services/api";
+import {
+  addItem,
+  deleteItem,
+  getItems,
+  updateItem,
+} from "../services/supabaseCrud";
 
 const useCrudPage = ({
   endpoint,
@@ -16,26 +21,38 @@ const useCrudPage = ({
   const [originalItem, setOriginalItem] = useState(null);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    let ignore = false;
     let isFetching = false;
 
     const fetchItems = async () => {
       if (isFetching) return;
       isFetching = true;
+      setLoading(true);
+      setError(null);
 
       try {
-        const response = await api.get(endpoint);
-        setItems(response.data);
+        const data = await getItems(endpoint);
+
+        if (!ignore) {
+          setItems(data);
+        }
       } catch (err) {
         console.log(err.message);
+        setError(err.message);
 
-        // FALLBACK 
-        if (fallbackData && items.length === 0) {
+        if (!ignore && fallbackData && items.length === 0) {
           setItems(fallbackData);
         }
       } finally {
         isFetching = false;
+
+        if (!ignore) {
+          setLoading(false);
+        }
       }
     };
 
@@ -43,14 +60,18 @@ const useCrudPage = ({
 
     const interval = setInterval(fetchItems, 5000);
 
-    return () => clearInterval(interval);
-  }, [endpoint, fallbackData]); // dependency 
+    return () => {
+      ignore = true;
+      clearInterval(interval);
+    };
+  }, [endpoint, fallbackData]);
 
   const filteredItems = useMemo(() => {
     let result = items;
 
     if (filter !== "all") {
       const targetValue = filters[filter];
+
       result = result.filter(
         (item) => String(item[filterField] || "") === String(targetValue)
       );
@@ -58,6 +79,7 @@ const useCrudPage = ({
 
     if (search.trim()) {
       const lowered = search.toLowerCase();
+
       result = result.filter((item) =>
         searchFields.some((field) =>
           String(item[field] || "").toLowerCase().includes(lowered)
@@ -82,6 +104,7 @@ const useCrudPage = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -105,29 +128,37 @@ const useCrudPage = ({
       if (!preparedData) return;
 
       if (editingId !== null) {
-        const updatedItem = { ...preparedData, id: editingId };
-        const response = await api.put(`${endpoint}/${editingId}`, updatedItem);
+        const updatedItem = {
+          ...preparedData,
+          id: editingId,
+        };
+
+        const updatedData = await updateItem(endpoint, editingId, updatedItem);
 
         setItems((prev) =>
-          prev.map((item) => (item.id === editingId ? response.data : item))
+          prev.map((item) => (item.id === editingId ? updatedData : item))
         );
       } else {
-        const response = await api.post(endpoint, preparedData);
-        setItems((prev) => [...prev, response.data]);
+        const createdData = await addItem(endpoint, preparedData);
+
+        setItems((prev) => [...prev, createdData]);
       }
 
       resetForm();
     } catch (err) {
       console.log(`Error: ${err.message}`);
+      setError(err.message);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`${endpoint}/${id}`);
+      await deleteItem(endpoint, id);
+
       setItems((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       console.log(`Error: ${err.message}`);
+      setError(err.message);
     }
   };
 
@@ -150,6 +181,8 @@ const useCrudPage = ({
     setSearch,
     filteredItems,
     stats,
+    loading,
+    error,
     handleChange,
     handleSubmit,
     handleDelete,

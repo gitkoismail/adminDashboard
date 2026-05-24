@@ -3,11 +3,11 @@ import AddOrders from "../components/AddOrders.jsx";
 import useCrudPage from "../hooks/useCrudPage.js";
 import useFetch from "../hooks/useFetch.js";
 import useOrderActions from "../hooks/useOrderActions.js";
-import api from "../services/api.js";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../components/ui/Loading.jsx";
 import dummyOrders from "../data/dummyOrders";
+import { updateItem } from "../services/supabaseCrud.js";
 
 const Orders = ( {setOrderDelete} ) => {
   const { isLoading, error} = useFetch("/orders");
@@ -94,10 +94,10 @@ const Orders = ( {setOrderDelete} ) => {
           return null;
         }
 
-        // CREATE DURUMU
+       // CREATE DURUMU
         if (!editingId) {
           if (newEffect > 0) {
-            await api.patch(`/products/${selectedProduct.id}`, {
+            await updateItem("/products", selectedProduct.id, {
               stock: stock - newEffect,
             });
           }
@@ -113,7 +113,7 @@ const Orders = ( {setOrderDelete} ) => {
             return null;
           }
 
-          await api.patch(`/products/${selectedProduct.id}`, {
+          await updateItem("/products", selectedProduct.id, {
             stock: newStock,
           });
         }

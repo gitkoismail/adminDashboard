@@ -3,8 +3,8 @@ import AddCustomer from "../components/AddCustomer";
 import useCrudPage from "../hooks/useCrudPage";
 import useFetch from "../hooks/useFetch";
 import useOrderActions from "../hooks/useOrderActions";
-import api from "../services/api";
 import dummyCustomers from "../data/dummyCustomers";
+import { deleteItem, getItems } from "../services/supabaseCrud";
 
 const customerConfig = {
   endpoint: "/customers",
@@ -52,7 +52,7 @@ const Customers = ( ) => {
     orders,
     products,
     async (id) => {
-      await api.delete(`/orders/${id}`); 
+      await deleteItem("/orders", id);
     }
   );
 
@@ -63,8 +63,7 @@ const handleDeleteCustomerWithCascade = async (customerId) => {
 
   if (!confirmDelete) return; 
   try {
-    const res = await api.get("/orders");
-    const allOrders = res.data;
+    const allOrders = orders.length ? orders : await getItems("/orders");
 
     const relatedOrders = allOrders.filter(
       (order) => String(order.customerId) === String(customerId)
